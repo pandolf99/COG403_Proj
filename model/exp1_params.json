@@ -1,0 +1,20 @@
+{
+	"group1": [
+		{
+			"fixed_latency": true,
+			"w_a": 1,
+			"w_c": 1,
+			"t_c->e": 800,
+			"t_a->e": 800,
+			"t_delta": 800  
+		},
+		{
+			"fixed_latency": true,
+			"w_a": 1,
+			"w_c": 1,
+			"t_c->e": 800,
+			"t_a->e": 800,
+			"t_delta": -800  
+		}
+	]
+}

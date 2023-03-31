@@ -10,12 +10,15 @@ def readParams(file):
 
 
 def runMC(data):
-    """Run the MonteCarlo Alogirthm as specified in the paper
+    """Get the alpha value to quantify time.
+    If fixed, just calculate, otherwise run montecarlo algo
     Parameters:
         data: dict with data, see dummy.json
     Returns:
         float: alpha value that quantifies preemption prob
     """
+    if data["fixed_latency"]:
+        return 1 if (data["t_a->e"] + data["t_delta"]) < data["t_c->e"] else 0
     #number of samples to take
     #test different values of this
     N = 1000000
@@ -51,6 +54,7 @@ def calcProb(data):
     return num / denom
 
 if __name__ == "__main__":
-    d= readParams("dummy.json")
-    d["alpha"] = runMC(d)
-    print(calcProb(d))
+    d= readParams("exp1_params.json")
+    for c in d["group1"]:
+        c["alpha"] = runMC(c)
+        print(calcProb(c))
