@@ -28,8 +28,7 @@ def runMC(data):
     scale_c = data["scale_c"]
     s_c = np.random.default_rng().gamma(shape_c, scale_c, N)
     #calculate t_(a->e) + t_delta
-    time_delta = data["t_a"] - data["t_c"] 
-    s_a = s_a + time_delta
+    s_a = s_a + data["t_delta"]
     #count samples that are < sc
     count = np.count_nonzero(s_a < s_c)
     ret = count / N
