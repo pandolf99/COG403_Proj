@@ -41,6 +41,11 @@ def plot_exp3(d):
         ax.bar_label(rects, padding=3)
         multiplier += 1
     title = "Interaction between causal strengths and causal latencies"
+    text1 = r'Long: $\kappa = 30, \theta = 100 $' + "\n"
+    text2 = r'Short: $\kappa = 10, \theta = 100$'+ "\n" 
+    props = dict(boxstyle='round', color="wheat")
+    ax.text(-0.25, 0.76, text1+text2, bbox=props)
+    ax.set_xlabel("Relative causal latencies of target cause")
     ax.set_ylabel('P(c->e|e,c,a)')
     ax.set_ylim(0, 1)
     ax.set_title(title)
