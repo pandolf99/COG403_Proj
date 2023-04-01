@@ -4,19 +4,50 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.offsetbox import AnchoredText
 
-def plotBarGraphs(x, y, title, text=None):
-    """Plot bar graphs for experiment 1-3
+def plot_exp2(x, y):
+    """Plot bar graphs for experiment 2
     """
+    text1 = r'Condition1: $\kappa = 10, \theta = 100 $' + "\n"
+    text2 = r'Condition2: $\kappa = 17.77, \theta = 100$'+ "\n" 
+    text3 = r'Condition3: $\kappa = 20, \theta = 100 $'+ "\n"
+    text4 = r'Condition4: $\kappa = 22, \theta = 100 $'+ "\n"
+    text5 = r'Condition5: $\kappa = 30, \theta = 100 $'
+    anchor = AnchoredText(text1+text2+text3+text4+text5, loc="upper right")
+    title = "Model predictions with alpha based on gamma distributions" 
     fig, ax = plt.subplots()
     ax.bar(x, y)
     ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
     ax.set_ylabel('P(c->e|e,c,a)')
     ax.set_ylim(0, 1)
     ax.set_title(title)
-    if text:
-        ax.add_artist(text)
+    ax.add_artist(anchor)
     plt.show()
 
+def plot_exp3(d):
+    conditions = ("Long", "Short")
+    causal_strengths = {
+        'causal strength = 0.5': (float(d["weak_long"]), float(d["weak_short"])),
+        'causal strength = 0.83': (float(d["strong_long"]), float(d["strong_short"])),
+    }
+    x = np.arange(len(conditions))  # the label locations
+    width = 0.45  # the width of the bars
+    multiplier = 0
+
+    fig, ax = plt.subplots(layout='constrained')
+
+    for s, val in causal_strengths.items():
+        offset = width * multiplier
+        rects = ax.bar(x + offset, val, width, label=s)
+        ax.bar_label(rects, padding=3)
+        multiplier += 1
+    title = "Interaction between causal strengths and causal latencies"
+    ax.set_ylabel('P(c->e|e,c,a)')
+    ax.set_ylim(0, 1)
+    ax.set_title(title)
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+    ax.set_xticks(x + 0.225, conditions)
+    ax.legend(loc='upper left', ncols=3)
+    plt.show()
 
 #read parameters from file
 #see dummy.json for format
@@ -105,13 +136,7 @@ def run_exp2():
     #data to plot 
     keys = [k for k in d_res.keys()]
     vals = [float(v) for v in d_res.values()]
-    text1 = r'Condition1: $\kappa = 10, \theta = 100 $' + "\n"
-    text2 = r'Condition2: $\kappa = 17.77, \theta = 100$'+ "\n" 
-    text3 = r'Condition3: $\kappa = 20, \theta = 100 $'+ "\n"
-    text4 = r'Condition4: $\kappa = 22, \theta = 100 $'+ "\n"
-    text5 = r'Condition5: $\kappa = 30, \theta = 100 $'
-    anchor = AnchoredText(text1+text2+text3+text4+text5, loc="upper right")
-    plotBarGraphs(keys, vals, "Model predictions with alpha based on gamma distributions", anchor)
+    plot_exp2(keys, vals)
     return parsed 
 
 def run_exp3(): 
@@ -122,10 +147,11 @@ def run_exp3():
         d[condition]["alpha"] = getAlpha(d[condition])
         d_res[condition] = f"{calcProb(d[condition])}"
     parsed = json.dumps(d_res, indent=4)
+    plot_exp3(d_res)
     return parsed 
 
 if __name__ == "__main__":
     # print(run_exp1())
-    print(run_exp2())
-    # print(run_exp3())
+    # print(run_exp2())
+    print(run_exp3())
 
