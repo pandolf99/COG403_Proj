@@ -19,6 +19,7 @@ def runMC(data):
     """
     if data["fixed_latency"]:
         return 1 if (data["t_a->e"] + data["t_delta"]) < data["t_c->e"] else 0
+    
     #number of samples to take
     #test different values of this
     N = 1000000
@@ -53,8 +54,21 @@ def calcProb(data):
     denom = (w_c+w_a)-(w_c*w_a) 
     return num / denom
 
+#create a dataframe to store the probability for each condition
+#def probDataframe(data): 
+ #   calcProb(data)
+
 if __name__ == "__main__":
     d= readParams("exp1_params.json")
-    for c in d["group1"]:
-        c["alpha"] = runMC(c)
-        print(calcProb(c))
+    for condition in d: #gets the condition/key of the data
+        data = (d[condition]) #gets the data under each condition
+        print(condition)
+        for i in data: 
+            i["alpha"] = runMC(i)
+            print(calcProb(i))
+            # Make predictions about singular causation judgments based on resulting probability
+            if calcProb(i) >= 0.5:
+                print("Result: Target cause is the singular cause of the effect")
+            else:
+                print("Result: Alternative cause is the singular cause or there is symmetric overdetermination")
+
