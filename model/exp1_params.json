@@ -1,6 +1,5 @@
-
-	{
-		"Ons-diff_Delay-same": [
+{
+	"Ons-diff_Delay-same": [
 		{
 			"fixed_latency": true,
 			"w_a": 1,
@@ -16,24 +15,24 @@
 			"t_c->e": 800,
 			"t_a->e": 800,
 			"t_delta": -800  
-		}], 
-	
-		"Ons-same_Delay-diff": [
+		}
+	], 
+	"Ons-same_Delay-diff": [
 		{
 			"fixed_latency": true,
 			"w_a": 1,
 			"w_c": 1,
 			"t_c->e": 800,
 			"t_a->e": 1600,
-			"t_delta": 800  
+			"t_delta": 0  
 		},
 		{
 			"fixed_latency": true,
 			"w_a": 1,
 			"w_c": 1,
-			"t_c->e": 800,
-			"t_a->e": 1600,
-			"t_delta": 800  
+			"t_c->e": 1600,
+			"t_a->e": 800,
+			"t_delta": 0
 		}
 	], 
 	"Ons-diff_Delay-diff_A": [
@@ -43,15 +42,15 @@
 			"w_c": 1,
 			"t_c->e": 800,
 			"t_a->e": 2400,
-			"t_delta": 800  
+			"t_delta": -800  
 		},
 		{
 			"fixed_latency": true,
 			"w_a": 1,
 			"w_c": 1,
-			"t_c->e": 800,
-			"t_a->e": 2400,
-			"t_delta": -800  
+			"t_c->e": 2400,
+			"t_a->e": 800,
+			"t_delta": 800  
 		}
 	], 
 	"Ons-diff_Delay-diff_B": [
@@ -67,8 +66,8 @@
 			"fixed_latency": true,
 			"w_a": 1,
 			"w_c": 1,
-			"t_c->e": 1600,
-			"t_a->e": 800,
+			"t_c->e": 800,
+			"t_a->e": 1600,
 			"t_delta": -1600  
 		}
 	]

@@ -54,21 +54,22 @@ def calcProb(data):
     denom = (w_c+w_a)-(w_c*w_a) 
     return num / denom
 
-#create a dataframe to store the probability for each condition
-#def probDataframe(data): 
- #   calcProb(data)
+
+def run_exp1():
+    d= readParams("exp1_params.json")
+    d_res = {} 
+    for condition in d: #gets the condition/key of the data
+        data = d[condition] #gets the data under each condition
+        d_res[condition] = []
+        for i, dt in enumerate(data): 
+            dt["alpha"] = runMC(dt)
+            prob = calcProb(dt)
+            resStr = f"Cause{i}: {prob}"
+            d_res[condition].append(resStr)
+    parsed = json.dumps(d_res, indent=4)
+    return parsed 
+
 
 if __name__ == "__main__":
-    d= readParams("exp1_params.json")
-    for condition in d: #gets the condition/key of the data
-        data = (d[condition]) #gets the data under each condition
-        print(condition)
-        for i in data: 
-            i["alpha"] = runMC(i)
-            print(calcProb(i))
-            # Make predictions about singular causation judgments based on resulting probability
-            if calcProb(i) >= 0.5:
-                print("Result: Target cause is the singular cause of the effect")
-            else:
-                print("Result: Alternative cause is the singular cause or there is symmetric overdetermination")
+    print(run_exp1())
 
