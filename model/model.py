@@ -1,5 +1,22 @@
 import numpy as np
 import json
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+from matplotlib.offsetbox import AnchoredText
+
+def plotBarGraphs(x, y, title, text=None):
+    """Plot bar graphs for experiment 1-3
+    """
+    fig, ax = plt.subplots()
+    ax.bar(x, y)
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+    ax.set_ylabel('P(c->e|e,c,a)')
+    ax.set_ylim(0, 1)
+    ax.set_title(title)
+    if text:
+        ax.add_artist(text)
+    plt.show()
+
 
 #read parameters from file
 #see dummy.json for format
@@ -32,7 +49,7 @@ def getAlpha(data):
     shape_c = data["shape_c"]
     scale_c = data["scale_c"]
     s_c = np.random.default_rng().gamma(shape_c, scale_c, N)
-    #calculate t_(a->e) + t_delta
+    #calc
     s_a = s_a + data["t_delta"]
     #count samples that are < sc
     count = np.count_nonzero(s_a < s_c)
@@ -71,7 +88,7 @@ def run_exp1():
             resStr = f"Cause{i}: {prob}"
             d_res[condition].append(resStr)
     parsed = json.dumps(d_res, indent=4)
-    return parsed 
+    return parsed
 
 def run_exp2(): 
     """Run all conditions for experiment 1
@@ -85,6 +102,16 @@ def run_exp2():
         d[condition]["alpha"] = getAlpha(d[condition])
         d_res[condition] = f"{calcProb(d[condition])}"
     parsed = json.dumps(d_res, indent=4)
+    #data to plot 
+    keys = [k for k in d_res.keys()]
+    vals = [float(v) for v in d_res.values()]
+    text1 = r'Condition1: $\kappa = 10, \theta = 100 $' + "\n"
+    text2 = r'Condition2: $\kappa = 17.77, \theta = 100$'+ "\n" 
+    text3 = r'Condition3: $\kappa = 20, \theta = 100 $'+ "\n"
+    text4 = r'Condition4: $\kappa = 22, \theta = 100 $'+ "\n"
+    text5 = r'Condition5: $\kappa = 30, \theta = 100 $'
+    anchor = AnchoredText(text1+text2+text3+text4+text5, loc="upper right")
+    plotBarGraphs(keys, vals, "Model predictions with alpha based on gamma distributions", anchor)
     return parsed 
 
 def run_exp3(): 
@@ -98,5 +125,7 @@ def run_exp3():
     return parsed 
 
 if __name__ == "__main__":
-    print(run_exp3())
+    # print(run_exp1())
+    print(run_exp2())
+    # print(run_exp3())
 
