@@ -1,0 +1,46 @@
+{
+	"weak_long": 
+		{
+			"fixed_latency": false,
+			"w_a": 0.5,
+			"w_c": 0.5,
+			"shape_c": 30,
+			"scale_c": 100,
+			"shape_a": 10,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"weak_short": 
+		{
+			"fixed_latency": false,
+			"w_a": 0.5,
+			"w_c": 0.5,
+			"shape_c": 10,
+			"scale_c": 100,
+			"shape_a": 30,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"strong_long":
+		{
+			"fixed_latency": false,
+			"w_a": 0.83,
+			"w_c": 0.83,
+			"shape_c": 30,
+			"scale_c": 100,
+			"shape_a": 10,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"strong_short":
+		{
+			"fixed_latency": false,
+			"w_a": 0.83,
+			"w_c": 0.83,
+			"shape_c": 10,
+			"scale_c": 100,
+			"shape_a": 30,
+			"scale_a": 100,
+			"t_delta": 0  
+		}
+}

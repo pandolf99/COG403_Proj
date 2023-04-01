@@ -9,17 +9,18 @@ def readParams(file):
     return d
 
 
-def runMC(data):
+def getAlpha(data):
     """Get the alpha value to quantify time.
     If fixed, just calculate, otherwise run montecarlo algo
+    as descibed in paper
     Parameters:
         data: dict with data, see dummy.json
+        use_mean: calculate alpha based on mean of gammas
     Returns:
         float: alpha value that quantifies preemption prob
     """
     if data["fixed_latency"]:
         return 1 if (data["t_a->e"] + data["t_delta"]) < data["t_c->e"] else 0
-    
     #number of samples to take
     #test different values of this
     N = 1000000
@@ -65,7 +66,7 @@ def run_exp1():
         data = d[condition] #gets the data under each condition
         d_res[condition] = []
         for i, dt in enumerate(data): 
-            dt["alpha"] = runMC(dt)
+            dt["alpha"] = getAlpha(dt)
             prob = calcProb(dt)
             resStr = f"Cause{i}: {prob}"
             d_res[condition].append(resStr)
@@ -73,15 +74,29 @@ def run_exp1():
     return parsed 
 
 def run_exp2(): 
+    """Run all conditions for experiment 1
+    Returns:
+        string: json formatted results for every condition
+    """
     d = readParams("exp2_params.json")
     d_res = {}
     for condition in d:
         #calculate alpha based on MC sampling
-        d[condition]["alpha"] = runMC(d[condition])
+        d[condition]["alpha"] = getAlpha(d[condition])
+        d_res[condition] = f"{calcProb(d[condition])}"
+    parsed = json.dumps(d_res, indent=4)
+    return parsed 
+
+def run_exp3(): 
+    d = readParams("exp3_params.json")
+    d_res = {}
+    for condition in d:
+        #calculate alpha based on MC sampling
+        d[condition]["alpha"] = getAlpha(d[condition])
         d_res[condition] = f"{calcProb(d[condition])}"
     parsed = json.dumps(d_res, indent=4)
     return parsed 
 
 if __name__ == "__main__":
-    print(run_exp2())
+    print(run_exp3())
 
