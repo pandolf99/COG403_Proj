@@ -1,0 +1,57 @@
+{
+	"Condition1": 
+		{
+			"fixed_latency": false,
+			"w_a": 1,
+			"w_c": 1,
+			"shape_c": 10,
+			"scale_c": 100,
+			"shape_a": 30,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"Condition2": 
+		{
+			"fixed_latency": false,
+			"w_a": 1,
+			"w_c": 1,
+			"shape_c": 17.77,
+			"scale_c": 100,
+			"shape_a": 22,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"condition3":
+		{
+			"fixed_latency": false,
+			"w_a": 1,
+			"w_c": 1,
+			"shape_c": 20,
+			"scale_c": 100,
+			"shape_a": 20,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"condition4":
+		{
+			"fixed_latency": false,
+			"w_a": 1,
+			"w_c": 1,
+			"shape_c": 22,
+			"scale_c": 100,
+			"shape_a": 17.77,
+			"scale_a": 100,
+			"t_delta": 0  
+		},
+	"condition5":
+		{
+			"fixed_latency": false,
+			"w_a": 1,
+			"w_c": 1,
+			"shape_c": 30,
+			"scale_c": 100,
+			"shape_a": 10,
+			"scale_a": 100,
+			"t_delta": 0  
+		}
+}

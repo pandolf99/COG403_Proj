@@ -36,7 +36,6 @@ def runMC(data):
     #count samples that are < sc
     count = np.count_nonzero(s_a < s_c)
     ret = count / N
-    print(ret)
     return ret
 
 
@@ -56,7 +55,11 @@ def calcProb(data):
 
 
 def run_exp1():
-    d= readParams("exp1_params.json")
+    """Run all conditions for experiment 1
+    Returns:
+        string: json formatted results for every condition
+    """
+    d = readParams("exp1_params.json")
     d_res = {} 
     for condition in d: #gets the condition/key of the data
         data = d[condition] #gets the data under each condition
@@ -69,7 +72,16 @@ def run_exp1():
     parsed = json.dumps(d_res, indent=4)
     return parsed 
 
+def run_exp2(): 
+    d = readParams("exp2_params.json")
+    d_res = {}
+    for condition in d:
+        #calculate alpha based on MC sampling
+        d[condition]["alpha"] = runMC(d[condition])
+        d_res[condition] = f"{calcProb(d[condition])}"
+    parsed = json.dumps(d_res, indent=4)
+    return parsed 
 
 if __name__ == "__main__":
-    print(run_exp1())
+    print(run_exp2())
 
