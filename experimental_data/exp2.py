@@ -23,7 +23,7 @@ def plot_exp2(x, y):
     text4 = r'Condition4: $\kappa = 22, \theta = 100 $'+ "\n"
     text5 = r'Condition5: $\kappa = 30, \theta = 100 $'
     anchor = AnchoredText(text1+text2+text3+text4+text5, loc="upper right")
-    title = "Model predictions with alpha based on gamma distributions" 
+    title = "Human judgments of singular causation" 
     fig, ax = plt.subplots()
     ax.bar(x, y)
     ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
@@ -43,7 +43,7 @@ def updateRating(row, *args):
     return 10 - row["Rating"]
 
 def cleanData():
-    df = pd.read_csv("sca2_data.txt", sep='\t')
+    df = pd.read_csv("Data Exp 2/sca2_data.txt", sep='\t')
     #update ratings based on alpha
     df_c1 = df[df["GammaDiff"] == "S-F_1"]
     df_c1["Rating"] = df_c1.apply(updateRating, axis=1, args=("c1",))

@@ -40,7 +40,7 @@ def plot_exp3(d):
         rects = ax.bar(x + offset, val, width, label=s)
         ax.bar_label(rects, padding=3)
         multiplier += 1
-    title = "Interaction between causal strengths and causal latencies"
+    title = "Predicted Interaction between causal strengths and causal latencies"
     text1 = r'Long: $\kappa = 30, \theta = 100 $' + "\n"
     text2 = r'Short: $\kappa = 10, \theta = 100$'+ "\n" 
     props = dict(boxstyle='round', color="wheat")
