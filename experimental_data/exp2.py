@@ -11,23 +11,35 @@ alphas = {
         }
 
 #Function to pass to apply
-#and update Rating
-def cleanData(row, *args):
+#and then update rating
+def updateRating(row, *args):
     a = row["Alpha"]
     cond = args[0]
-    print(type(a))
     if a == alphas[cond]:
         return row["Rating"]
     return 10 - row["Rating"]
 
+def cleanData():
+    df = pd.read_csv("sca2_data.txt", sep='\t')
+    #update ratings based on alpha
+    df_c1 = df[df["GammaDiff"] == "S-F_1"]
+    df_c1["Rating"] = df_c1.apply(updateRating, axis=1, args=("c1",))
+    df_c2 = df[df["GammaDiff"] == "S-F_2"]
+    df_c2["Rating"] = df_c2.apply(updateRating, axis=1, args=("c2",))
+    df_c3 = df[df["GammaDiff"] == "Control"]
+    df_c3["Rating"] = df_c3.apply(updateRating, axis=1, args=("c3",))
+    df_c4 = df[df["GammaDiff"] == "F-S_2"]
+    df_c4["Rating"] = df_c4.apply(updateRating, axis=1, args=("c4",))
+    df_c5 = df[df["GammaDiff"] == "F-S_1"]
+    df_c5["Rating"] = df_c5.apply(updateRating, axis=1, args=("c5",))
+    df_ratings = pd.DataFrame({
+        "c1":df_c1["Rating"],
+        "c2":df_c2["Rating"],
+        "c3":df_c3["Rating"],
+        "c4":df_c4["Rating"],
+        "c5":df_c5["Rating"],
+         })
+    print(df_ratings.apply(np.mean) / 10)
 
-df = pd.read_csv("sca2_data.txt", sep='\t')
-df_c1 = df[df["GammaDiff"] == "S-F_1"]
-df_c1["Rating"] = df_c1.apply(cleanData, axis=1, args=("c1",))
-df_c2 = df[df["GammaDiff"] == "S-F_2"]
-df_c3 = df[df["GammaDiff"] == "Control"]
-df_c4 = df[df["GammaDiff"] == "F-S_1"]
-df_c5 = df[df["GammaDiff"] == "F-S_2"]
-ratings_c1 = np.asarray(df_c1["Rating"])
-ratings_c1 = ratings_c1 / 10
-print(np.mean(ratings_c1))
+if __name__ == "__main__":
+    cleanData()
