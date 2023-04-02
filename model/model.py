@@ -13,7 +13,7 @@ def plot_exp2(x, y):
     text4 = r'Condition4: $\kappa = 22, \theta = 100 $'+ "\n"
     text5 = r'Condition5: $\kappa = 30, \theta = 100 $'
     anchor = AnchoredText(text1+text2+text3+text4+text5, loc="upper right")
-    title = "Model predictions with alpha based on gamma distributions" 
+    title = "Model predictions of singular causation" 
     fig, ax = plt.subplots()
     ax.bar(x, y)
     ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
@@ -157,6 +157,6 @@ def run_exp3():
 
 if __name__ == "__main__":
     # print(run_exp1())
-    # print(run_exp2())
-    print(run_exp3())
+    print(run_exp2())
+    # print(run_exp3())
 
