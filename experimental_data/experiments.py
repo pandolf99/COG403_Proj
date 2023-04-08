@@ -24,14 +24,9 @@ def bootstrap_95_CI(data):
     for col in data:
         s_means = np.zeros(10000)
         for i in range(10000):
-            sample = np.random.choice(np.asarray(data[col]), 40)
+            sample = np.random.choice(data[col], len(data[col]))
             s_mean = np.mean(sample)
             s_means[i] = s_mean
-        bins = plt.hist(s_means, 100)
-        plt.xlabel('Sample Means')
-        plt.ylabel('Counts')
-        plt.title('Histogram of sample means over 2500 iterations')
-        plt.show()
         percentiles[col] = np.percentile(s_means, [2.5, 97.5])
     return percentiles
 
@@ -48,23 +43,23 @@ def cleanData2():
     df = pd.read_csv("experimental_data/Data Exp 2/sca2_data.txt", sep='\t')
     #update ratings based on alpha
     df_c1 = df[df["GammaDiff"] == "S-F_1"]
-    df_c1["Rating"] = df_c1.apply(updateRating2, axis=1, args=("c1",))
+    df_c1 = pd.Series.reset_index(df_c1.apply(updateRating2, axis=1, args=("c1",)), drop=True)
     df_c2 = df[df["GammaDiff"] == "S-F_2"]
-    df_c2["Rating"] = df_c2.apply(updateRating2, axis=1, args=("c2",))
+    df_c2 = pd.Series.reset_index(df_c2.apply(updateRating2, axis=1, args=("c2",)), drop=True)
     df_c3 = df[df["GammaDiff"] == "Control"]
-    df_c3["Rating"] = df_c3.apply(updateRating2, axis=1, args=("c3",))
+    df_c3 = pd.Series.reset_index(df_c3.apply(updateRating2, axis=1, args=("c3",)), drop=True)
     df_c4 = df[df["GammaDiff"] == "F-S_2"]
-    df_c4["Rating"] = df_c4.apply(updateRating2, axis=1, args=("c4",))
+    df_c4 = pd.Series.reset_index(df_c4.apply(updateRating2, axis=1, args=("c4",)), drop=True)
     df_c5 = df[df["GammaDiff"] == "F-S_1"]
-    df_c5["Rating"] = df_c5.apply(updateRating2, axis=1, args=("c5",))
-    df_ratings = pd.DataFrame({
-        "c1":df_c1["Rating"],
-        "c2":df_c2["Rating"],
-        "c3":df_c3["Rating"],
-        "c4":df_c4["Rating"],
-        "c5":df_c5["Rating"],
-         })
-    return df_ratings
+    df_c5 = pd.Series.reset_index(df_c5.apply(updateRating2, axis=1, args=("c5",)), drop=True)
+    ratings = [ 
+               df_c1.rename("condition1"),
+               df_c2.rename("condition2"),
+               df_c3.rename("condition3"),
+               df_c4.rename("condition4"),
+               df_c5.rename("condition5"),
+               ]
+    return pd.concat(ratings, axis=1)
 
 def exp2_data():
     labels = ["Condition1", "Condition2", "Condition3", "Condition4", "Condition5"]
@@ -118,7 +113,3 @@ def exp3_data():
             "strong_long": mean_strong_long
             }
     return d_means
-
-if __name__ == "__main__":
-    ratings = cleanData3()
-    print(bootstrap_95_CI(ratings))
