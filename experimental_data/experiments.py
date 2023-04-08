@@ -20,15 +20,15 @@ def bootstrap_95_CI(data):
     Returns:
         [2]: 95% confidence interval
     """
-    percentiles = {}
+    percentiles = []
     for col in data:
         s_means = np.zeros(10000)
         for i in range(10000):
             sample = np.random.choice(data[col], len(data[col]))
             s_mean = np.mean(sample)
             s_means[i] = s_mean
-        percentiles[col] = np.percentile(s_means, [2.5, 97.5])
-    return percentiles
+        percentiles.append(np.percentile(s_means, [2.5, 97.5]))
+    return np.asarray(percentiles)
 
 #Function to pass to apply in exp2
 #and then update rating
@@ -67,6 +67,10 @@ def exp2_data():
     means = np.asarray(df_ratings.apply(np.mean)) / 10
     return dict(zip(labels, means))
 
+def get_errors2():
+    data = cleanData2()
+    return bootstrap_95_CI(data) / 10
+
 #Function to pass to apply in exp3
 #and then update rating
 def updateRating3(row, *args):
@@ -98,6 +102,11 @@ def cleanData3():
             ]
     df_ratings = pd.concat(ratings, axis=1,)
     return df_ratings
+
+def get_errors3():
+    data = cleanData3()
+    return bootstrap_95_CI(data)
+
 
 ##just a wrapper for api purposes
 def exp3_data():
