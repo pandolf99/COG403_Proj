@@ -3,13 +3,41 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 from matplotlib.offsetbox import AnchoredText
 
+#first tuple is onset
+#second tuple is latency
+#first item of tuple is early 
+#second item of tuple is late
+exp1_conditions = {
+        "ons_diff_delay_same": [(800, 1600), (800, 800)],
+        "ons_same_delay_diff": [(800, 800), (800, 1600)],
+        "ons_diff_delay_diffA": [(1600, 800), (800, 2400)],
+        "ons_diff_delay_diffB": [(800, 2400), (1600, 800)],
+        }
+
+def plot_exp1(d, title, key, errors=None):
+    if errors is not None:
+        errs = [(e[1] - e[0])/2 for e in errors]
+    fig, ax = plt.subplots()
+    conds = exp1_conditions[key]
+    late_label = f"onset: {conds[0][1]} \n latency: {conds[1][1]}"
+    early_label = f"onset: {conds[0][0]} \n latency: {conds[1][0]}"
+    labels = [late_label, early_label]
+    print(labels)
+    ax.bar(labels, np.asarray(d), yerr=errs)
+    ax.set_ylabel('P(c->e|e,c,a)')
+    ax.set_ylim(0, 1)
+    ax.set_title(title)
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+    plt.savefig(f"results/{title}.png")
+
+
 def plot_exp2(d, title, errors=None):
     """Plot bar graph for experiment 2,
     d: dict with keys as conditions and values for condition
     title: title to use (experimental or prediction)
     """
     if errors is not None:
-        errs = [(e[1] - e[0]) for e in errors]
+        errs = [(e[1] - e[0])/2 for e in errors]
     x = d.keys()
     y = [float(v) for v in d.values()]
     text1 = r'Condition1: $\kappa = 10, \theta = 100 $' + "\n"
@@ -34,7 +62,7 @@ def plot_exp3(d, title, errors=None):
     title: title to use (experimental or prediction)
     """
     if errors is not None:
-        errs = [(e[1] - e[0]) for e in errors]
+        errs = [(e[1] - e[0])/2 for e in errors]
     conditions = ("Long", "Short")
     causal_strengths = {
         'causal strength = 0.5': (float(d["weak_short"]), float(d["weak_long"])),

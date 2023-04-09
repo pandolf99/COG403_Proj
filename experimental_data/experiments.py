@@ -30,6 +30,59 @@ def bootstrap_95_CI(data):
         percentiles.append(np.percentile(s_means, [2.5, 97.5]))
     return np.asarray(percentiles)
 
+def cleanData1():
+    exp1_data = pd.read_csv("experimental_data/Data Exp 1/sca1_data.txt", sep = '\t')
+    exp1_data = exp1_data.drop(
+            ["subjID", "sex", "age", "taskOrder", "firstTower",
+             "scaleOrientation", "respTime", "title", "earlyTower", "targetCause"],
+            axis=1)
+    ons_diff_delay_same_late = exp1_data[(exp1_data['condition'] == 'Ons-diff_Delay-same') & 
+                                    (exp1_data["targetCauseRec"] == "Late Tower")]["rating"]
+    ons_diff_delay_same_early = exp1_data[(exp1_data['condition'] == 'Ons-diff_Delay-same') & 
+                                    (exp1_data["targetCauseRec"] == "Early Tower")]["rating"]
+    ons_same_delay_diff_late = exp1_data[(exp1_data['condition'] == 'Ons-same_Delay-diff') & 
+                                    (exp1_data["targetCauseRec"] == "Late Tower")]["rating"]
+    ons_same_delay_diff_early = exp1_data[(exp1_data['condition'] == 'Ons-same_Delay-diff') & 
+                                    (exp1_data["targetCauseRec"] == "Early Tower")]["rating"]
+    ons_diff_delay_diffA_late = exp1_data[(exp1_data['condition'] == "Ons-diff_Delay-diff_A") & 
+                                    (exp1_data["targetCauseRec"] == "Late Tower")]["rating"]
+    ons_diff_delay_diffA_early = exp1_data[(exp1_data['condition'] == "Ons-diff_Delay-diff_A") & 
+                                    (exp1_data["targetCauseRec"] == "Early Tower")]["rating"]
+    ons_diff_delay_diffB_late = exp1_data[(exp1_data['condition'] == "Ons-diff_Delay-diff_B") & 
+                                    (exp1_data["targetCauseRec"] == "Late Tower")]["rating"]
+    ons_diff_delay_diffB_early = exp1_data[(exp1_data['condition'] == "Ons-diff_Delay-diff_B") & 
+                                    (exp1_data["targetCauseRec"] == "Early Tower")]["rating"]
+    series = [
+            pd.Series.reset_index(
+                ons_diff_delay_same_late.rename("ons_diff_delay_same_late"), drop=True),
+            pd.Series.reset_index(
+                ons_diff_delay_same_early.rename("ons_diff_delay_same_early"), drop=True),
+            pd.Series.reset_index(
+                ons_same_delay_diff_late.rename("ons_same_delay_diff_late"), drop=True),
+            pd.Series.reset_index(
+                ons_same_delay_diff_early.rename("ons_same_delay_diff_early"), drop=True),
+            pd.Series.reset_index(
+                ons_diff_delay_diffA_late.rename("ons_diff_delay_diffA_late"), drop=True),
+            pd.Series.reset_index(
+                ons_diff_delay_diffA_early.rename("ons_diff_delay_diffA_early"), drop=True),
+            pd.Series.reset_index(
+                ons_diff_delay_diffB_late.rename("ons_diff_delay_diffB_late"), drop=True),
+            pd.Series.reset_index(
+                ons_diff_delay_diffB_early.rename("ons_diff_delay_diffB_early"), drop=True)
+            ]
+    return pd.concat(series, axis=1)
+
+def exp1_data():
+    d = cleanData1()
+    d = d.apply(np.mean)
+    return d
+
+#get the errors for condition c
+def get_errors1(k):
+    df = cleanData1()
+    df = df.filter(like=k)
+    return bootstrap_95_CI(df)
+
 #Function to pass to apply in exp2
 #and then update rating
 def updateRating2(row, *args):
