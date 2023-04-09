@@ -5,7 +5,7 @@ import experimental_data.experiments as exps
 
 
 def corr_exp2():
-    """Calculatet the mean 
+    """Calculate correlation
     """
     exp_data =  exps.exp2_data()
     exp_data = [float(v) for v in exp_data.values()]
@@ -30,3 +30,101 @@ def t_test_within_long():
     strong_short = np.asarray(data["strong_short"])
     short = np.concatenate((weak_short, strong_short))
     print(ttest_ind(weak_short, strong_short))
+    return
+
+
+def t_test(d1, d2):
+    """Perform a t test between d1 and d2
+    Also return cohen's d
+    """
+    n1 = len(d1)
+    n2 = len(d2)
+    s1 = np.var(d1, ddof=1)
+    s2 = np.var(d2, ddof=1)
+    s = np.sqrt(((n1 - 1)*s1 + (n2 - 1)*s2) / (n1 + n2 - 2))
+    d = (np.mean(d1) - np.mean(d2)) / s
+    stat, p = ttest_ind(d1, d2)
+    return {
+            "t_stat": stat,
+            "p_value": p,
+            "cohen_d": d
+            }
+
+
+def exp1_stats():
+    d = exps.cleanData1()
+    ret = {}
+    for col in d:
+        cond = d[col]
+        mean = np.mean(cond)
+        std = np.std(cond)
+        med = np.median(cond)
+        CI = exps.get_errors1(col)
+        ret[col] = {
+                "mean": mean,
+                "std": std,
+                "med": med,
+                "95CI": CI
+                }
+    return ret
+
+def exp1_t_test():
+    d = exps.cleanData1()
+    k1 = "ons_diff_delay_same"
+    c1 = d.filter(like=k1)
+    c1_t = t_test(np.asarray(c1.iloc[:, 1]), np.asarray(c1.iloc[:, 0]))
+    k2 = "ons_same_delay_diff"
+    c2 = d.filter(like=k2)
+    c2_t = t_test(np.asarray(c2.iloc[:, 1]), np.asarray(c2.iloc[:, 0]))
+    k3 = "ons_diff_delay_diffA"
+    c3 = d.filter(like=k3)
+    c3_t = t_test(np.asarray(c3.iloc[:, 1]), np.asarray(c3.iloc[:, 0]))
+    k4 = "ons_diff_delay_diffB"
+    c4 = d.filter(like=k4)
+    c4_t = t_test(np.asarray(c4.iloc[:, 1]), np.asarray(c4.iloc[:, 0]))
+    return {
+            k1: c1_t,
+            k2: c2_t,
+            k3: c3_t,
+            k4: c4_t
+            }
+
+def exp2_stats():
+    d = exps.cleanData2()
+    ret = {}
+    i = 0
+    for col in d:
+        cond = d[col]
+        mean = np.mean(cond)
+        std = np.std(cond)
+        med = np.median(cond)
+        CI = exps.get_errors2()[i]
+        ret[col] = {
+                "mean": mean,
+                "std": std,
+                "med": med,
+                "95CI": CI
+                }
+        i+=1
+    return ret
+
+def exp3_stats():
+    d = exps.cleanData3()
+    ret = {}
+    i = 0
+    for col in d:
+        cond = d[col]
+        mean = np.mean(cond)
+        std = np.std(cond)
+        med = np.median(cond)
+        CI = exps.get_errors2()[i]
+        ret[col] = {
+                "mean": mean,
+                "std": std,
+                "med": med,
+                "95CI": CI
+                }
+        i+=1
+    return ret
+
+
