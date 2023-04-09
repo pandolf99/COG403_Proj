@@ -37,12 +37,13 @@ def run_exp2():
     return
 
 def run_exp3():
-    d_pred3 = exp3_prediction()
-    plot_exp3(d_pred3, "Model Predictions for experiment 3")
-    d_data3 = exp3_data()
-    errors3 = get_errors3()
-    plot_exp3(d_data3, "Results for experiment 3", errors3)
+    # d_pred3 = exp3_prediction()
+    # plot_exp3(d_pred3, "Model Predictions for experiment 3")
+    # d_data3 = exp3_data()
+    # errors3 = get_errors3()
+    # plot_exp3(d_data3, "Results for experiment 3", errors3)
+    print(exp3_t_test())
     return 
 
 if __name__ == "__main__":
-    run_exp2()
+    run_exp3()

@@ -13,7 +13,7 @@ def corr_exp2():
     mod_data = [float(v) for v in mod_data.values()]
     return pearsonr(mod_data,exp_data)
 
-def t_test_within_long():
+def exp3_t_test():
     data = exps.cleanData3()
     weak_long = np.asarray(data["weak_long"])
     strong_long = np.asarray(data["strong_long"])
@@ -24,13 +24,29 @@ def t_test_within_long():
     s = np.sqrt(((n1 - 1)*s1 + (n2 - 1)*s2) / (n1 + n2 - 2))
     d = (np.mean(weak_long) - np.mean(strong_long)) / s
     stat, p = ttest_ind(weak_long, strong_long)
-    print(p, d)
-    # long = np.concatenate((weak_long, strong_long))
+    long = {
+            "t_stat": stat,
+            "p_value": p,
+            "cohen_d": d
+            }
     weak_short = np.asarray(data["weak_short"])
     strong_short = np.asarray(data["strong_short"])
-    short = np.concatenate((weak_short, strong_short))
-    print(ttest_ind(weak_short, strong_short))
-    return
+    n1 = len(weak_short)
+    n2 = len(strong_short)
+    s1 = np.var(weak_short, ddof=1)
+    s2 = np.var(strong_short, ddof=1)
+    s = np.sqrt(((n1 - 1)*s1 + (n2 - 1)*s2) / (n1 + n2 - 2))
+    d = (np.mean(weak_short) - np.mean(strong_short)) / s
+    stat, p = ttest_ind(strong_short, weak_short)
+    short = {
+            "t_stat": stat,
+            "p_value": p,
+            "cohen_d": d
+            }
+    return {
+            "long": long,
+            "short": short
+            }
 
 
 def t_test(d1, d2):
@@ -117,14 +133,12 @@ def exp3_stats():
         mean = np.mean(cond)
         std = np.std(cond)
         med = np.median(cond)
-        CI = exps.get_errors2()[i]
+        CI = exps.get_errors3()[i]
         ret[col] = {
                 "mean": mean,
                 "std": std,
                 "med": med,
                 "95CI": CI
                 }
-        i+=1
+        i += 1
     return ret
-
-
