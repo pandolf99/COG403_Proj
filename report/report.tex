@@ -1,0 +1,429 @@
+% 
+% Annual Cognitive Science Conference
+% Sample LaTeX Paper -- Proceedings Format
+% 
+
+% Original : Ashwin Ram (ashwin@cc.gatech.edu)       04/01/1994
+% Modified : Johanna Moore (jmoore@cs.pitt.edu)      03/17/1995
+% Modified : David Noelle (noelle@ucsd.edu)          03/15/1996
+% Modified : Pat Langley (langley@cs.stanford.edu)   01/26/1997
+% Latex2e corrections by Ramin Charles Nakisa        01/28/1997 
+% Modified : Tina Eliassi-Rad (eliassi@cs.wisc.edu)  01/31/1998
+% Modified : Trisha Yannuzzi (trisha@ircs.upenn.edu) 12/28/1999 (in process)
+% Modified : Mary Ellen Foster (M.E.Foster@ed.ac.uk) 12/11/2000
+% Modified : Ken Forbus                              01/23/2004
+% Modified : Eli M. Silk (esilk@pitt.edu)            05/24/2005
+% Modified : Niels Taatgen (taatgen@cmu.edu)         10/24/2006
+% Modified : David Noelle (dnoelle@ucmerced.edu)     11/19/2014
+% Modified : Roger Levy (rplevy@mit.edu)     12/31/2018
+
+
+
+%% Change "letterpaper" in the following line to "a4paper" if you must.
+
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage{cogsci}
+\usepackage{booktabs}
+
+\cogscifinalcopy % Uncomment this line for the final submission 
+
+
+\usepackage{pslatex}
+\usepackage{apacite}
+\usepackage{float} % Roger Levy added this and changed figure/table
+                   % placement to [H] for conformity to Word template,
+                   % though floating tables and figures to top is
+                   % still generally recommended!
+
+%\usepackage[none]{hyphenat} % Sometimes it can be useful to turn off
+%hyphenation for purposes such as spell checking of the resulting
+%PDF.  Uncomment this block to turn off hyphenation.
+
+
+%\setlength\titlebox{4.5cm}
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 4.5cm (the original size).
+%%If you do, we reserve the right to require you to change it back in
+%%the camera-ready version, which could interfere with the timely
+%%appearance of your paper in the Proceedings.
+
+
+
+\title{Temporal Components in Judgements of Singular Causation}
+ 
+\author{{\large \bf Ignacio Acosta Hernandez (ignacio.acosta@mail.utoronto.ca)} \\
+  \AND {\large \bf Sharon J.~Derry (SDJ@Macc.Wisc.Edu)} \\
+  Department of Educational Psychology, 1025 W. Johnson Street \\
+  Madison, WI 53706 USA}
+
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+Include no author information in the initial submission, to facilitate
+blind review.  The abstract should be one paragraph, indented 1/8~inch on both sides,
+in 9~point font with single spacing. The heading ``{\bf Abstract}''
+should be 10~point, bold, centered, with one line of space below
+it. This one-paragraph abstract section is required only for standard
+six page proceedings papers. Following the abstract should be a blank
+line, followed by the header ``{\bf Keywords:}'' and a list of
+descriptive keywords separated by semicolons, all in 9~point font, as
+shown below.
+
+\textbf{Keywords:} 
+add your choice of indexing terms or keywords; kindly use a
+semicolon; between each term
+\end{abstract}
+
+
+\section{General Formatting Instructions}
+
+The entire content of a paper (including figures, references, and anything else) can be no longer than six pages in the \textbf{initial submission}. In the \textbf{final submission}, the text of the paper, including an author line, must fit on six pages. Up to one additional page can be used for acknowledgements and references.
+
+The text of the paper should be formatted in two columns with an
+overall width of 7 inches (17.8 cm) and length of 9.25 inches (23.5
+cm), with 0.25 inches between the columns. Leave two line spaces
+between the last author listed and the text of the paper; the text of
+the paper (starting with the abstract) should begin no less than 2.75 inches below the top of the
+page. The left margin should be 0.75 inches and the top margin should
+be 1 inch.  \textbf{The right and bottom margins will depend on
+  whether you use U.S. letter or A4 paper, so you must be sure to
+  measure the width of the printed text.} Use 10~point Times Roman
+with 12~point vertical spacing, unless otherwise specified.
+
+The title should be in 14~point bold font, centered. The title should
+be formatted with initial caps (the first letter of content words
+capitalized and the rest lower case). In the initial submission, the
+phrase ``Anonymous CogSci submission'' should appear below the title,
+centered, in 11~point bold font.  In the final submission, each
+author's name should appear on a separate line, 11~point bold, and
+centered, with the author's email address in parentheses. Under each
+author's name list the author's affiliation and postal address in
+ordinary 10~point type.
+
+Indent the first line of each paragraph by 1/8~inch (except for the
+first paragraph of a new section). Do not add extra vertical space
+between paragraphs.
+
+
+\section{Results And Discussion}
+
+\subsection{Experiment 1}
+The purpose of experiment 1 was to test the hypothesis that humans integrate temporal information when making
+judgments of singular causation. For this experiment, as the causal latencies are fixed, the model computes the $\alpha$ value
+as $0$ or $1$. Further, as the causal strenghts are both deterministic, the model predicts a probability of $1$ for the cause with the smaller sum of causal latency and causal onset. Intuitively, since there is no probability involved, the cause which produces its effect the fastest, will always be the actual singular cause. The collected data support this hypothesis and is summarized in the tables below alongside
+relevant statistical tests:
+A visualization is included in the appendix.
+\begin{table}[H]
+\begin{center} 
+\caption{Summary for experiment 1 Condition 1} 
+\label{summary exp1} 
+\vskip 0.12in
+\begin{tabular}{lll} 
+\toprule
+& Short Cause &  Long Cause\\
+\midrule
+	Mean & $0.75$ & $0.22$  \\
+	Median & $0.8$ & $0.1$  \\
+	Stdv & $0.24$ & $0.23$  \\
+	$95\%$CI & $[0.68, 0.81]$ &  $[0.15, 0.29]$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+A t-test between the means reveals a significant result: $t(94) = 11.01, p < 0.01, d = 2.25$
+\begin{table}[H]
+\begin{center} 
+\caption{Summary for experiment 1 Condition 2} 
+\label{summary exp1} 
+\vskip 0.12in
+\begin{tabular}{lll} 
+\toprule
+& Short Cause &  Long Cause\\
+\midrule
+	Mean & $0.83$ & $0.25$  \\
+	Median & $0.9$ & $0.1$  \\
+	Stdv & $0.21$ & $0.25$  \\
+	$95\%$CI & $[0.76, 0.88]$ &  $[0.18, 0.32]$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+A t-test between the means reveals a significant result: $t(94) = 12.15, p < 0.01, d = 2.48$
+\begin{table}[H]
+\begin{center} 
+\caption{Summary for experiment 1 Condition 3} 
+\label{summary exp1} 
+\vskip 0.12in
+\begin{tabular}{lll} 
+\toprule
+& Short Cause &  Long Cause\\
+\midrule
+	Mean & $0.66$ & $0.47$  \\
+	Median & $0.8$ & $0.5$  \\
+	Stdv & $0.30$ & $0.32$  \\
+	$95\%$CI & $[0.57, 0.74]$ &  $[0.38, 0.56]$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+A t-test between the means reveals a significant result: $t(94) = 3.02, p < 0.01, d = 0.61$
+\begin{table}[H]
+\begin{center} 
+\caption{Summary for experiment 1 Condition 4} 
+\label{summary exp1} 
+\vskip 0.12in
+\begin{tabular}{lll} 
+\toprule
+& Short Cause &  Long Cause\\
+\midrule
+	Mean & $0.69$ & $0.42$  \\
+	Median & $0.75$ & $0.5$  \\
+	Stdv & $0.28$ & $0.25$  \\
+	$95\%$CI & $[0.60, 0.76]$ & $[0.35, 0.49]$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+A t-test between the means reveals a significant result: $t(94) = 4.80, p < 0.01, d = 0.98$
+
+The results show that the shorter cause was always rated as having higher probability as the actual singular cause than was
+the longer cause. This means that the subjects were sensitive to temporal variables when making singular causation judgments.
+This is also inline with what the model predicted. However, it is interesting to note that even on a deterministic scenario, the subjects were still uncertain and did not consistently rate the shorter cause as being deterministic. This is contrasted to the model, which does predict a deterministic outcome. This might seem as a potential flaw of the model, however this model is not designed for deterministic scenarios,
+and neither it should. As we operate in the natural world, where causal strengths and cuasal latencies might be probabilistic, it makes sense
+to build a model to take this into account. Also of interest in this first experiment is the fact that the differences between the means in the first two conditions are less than the differences between the means in the last two conditions. This can be explained by the fact that in
+the last two conditions, a more complex computation has to be made to determine which cause is the fastest acting. Whereas in the first 
+two conditions, since only one variable is changed, the computation is easier.
+
+\subsection{Experiment 2}
+The purpose of this experiment was to determine if different gamma distributions for causal latency produce a different rating of probability of singular causation. The different gamma distributions correspond to different $\alpha$ values. The model predicts that as $\alpha$
+increases, the probability of the target cause being the singular cause will decrease (given deterministic causal strenghts). This is
+becuase $\alpha$ is the the probability of the target cause being pre-empted by the alternative cause. The model predictions and 
+the experimental results are summarized below and a visual is included in the appendix.
+\begin{table}[H]
+\begin{center} 
+\caption{Model predictions for experiment 2} 
+\label{model preds} 
+\vskip 0.12in
+\begin{tabular}{lllll} 
+\toprule
+$\alpha = 0.01$ &  $\alpha = 0.25$ & $\alpha = 0.50$ & $\alpha = 0.75$ & $\alpha = 0.99$\\
+\midrule
+	$\approx 1$ & $0.75$ & $0.5$ & $0.25$ & $\approx 0$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+\begin{table}[H]
+\begin{center} 
+\caption{Behavioural results for experiment 2} 
+\label{model preds} 
+\vskip 0.12in
+\begin{tabular}{llll} 
+\toprule
+& $\alpha = 0.01$ &  $\alpha = 0.25$ & $\alpha = 0.50$ \\
+\midrule
+	M & $0.90$ & $0.63$ & $0.53$ \\
+	MD & $0.90$ & $0.7$ & $0.5$ \\
+	$\sigma$ & $0.12$ & $0.23$ & $0.24$ \\
+	CI & $[0.85, 0.93]$ & $[0.56, 0.70]$ & $[0.46, 0.61]$ \\
+\bottomrule
+\end{tabular} 
+\begin{tabular}{lll} 
+& $\alpha = 0.75$ & $\alpha = 0.99$\\
+\midrule
+	M &  $0.32$ & $0.09$ \\
+	MD &  $0.3$ & $0.1$ \\
+	$\sigma$ & $0.17$ & $0.1$ \\
+	CI & $[0.27, 0.37]$ & $[0.06, 0.12]$\\
+\bottomrule
+\end{tabular}
+\end{center} 
+\end{table}
+
+A correlation test between the model predictions and the behavioural data's mean resulted in $r = 0.99$ and $p < 0.01$. A visual is included
+in the appendix.
+\footnote{Note that there was also a strong and significant positive correlation between the predictions and all data points, but only the means were include here.}
+These results show that subjects are able to make judgments about singular causation when causal latencies follow a probability distribution.
+Further, the ratings of the subjects are dependent on the gamma distributions and thus on the $\alpha$ value. This suggests that humans are able to form an esimate for $\alpha$, or the probability that the target cause is pre-empted, and then make a judgement on the
+probability that the target cause is the actual cause using this information. 
+
+
+\subsection{Experiment 3}
+The purpose of this experiment was to determine the interaction between causal strength and causal latencies. The model predicts that when the target cause has a longer
+causal latency than the alternative cause, then subjects will be less confident of the target cause when the both causal strengths are strong than when both causal strengths are weak.
+Intuitively, we are comparing the cases when the alternative cause is acting faster but unreliably (weak causal strength) and when it is acting faster and reliably (strong causal strength). We expect the former to produce higher ratings than the latter. Conversely, when the target cause has relatively short causal latency, we expect the rating to be higher on the strong condition, since the target cause is happening quicker and reliably. The model predictions and experimental results are included below, and a visual in the appendix. Here the columns refer to the conditions on the target cause.
+ 
+
+\begin{table}[H]
+\begin{center} 
+\caption{Model predictions for experiment 3} 
+\label{summary exp1} 
+\vskip 0.12in
+\begin{tabular}{lllll} 
+\toprule
+weak\&long&weak\&short&strong\&long&strong\&short\\
+\midrule
+	$0.33$ & $0.67$ & $0.15$ & $0.85$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+
+\begin{table}[H]
+\begin{center} 
+\caption{Behavioural results for experiment 3} 
+\label{model preds} 
+\vskip 0.12in
+\begin{tabular}{lll} 
+\toprule
+& weak\&short & strong\&short \\
+\midrule
+	M & $0.66$ & $0.72$ \\ 
+	MD & $0.7$ & $0.8$ \\
+	$\sigma$ & $0.19$ & $0.24$ \\ 
+	CI & $[0.60, 0.72]$ & $[0.64, 0.80]$ \\
+\bottomrule
+\end{tabular} 
+\begin{tabular}{lll} 
+\toprule
+& weak\&long & strong\&long \\
+\midrule
+	M & $0.39$ & $0.27$ \\ 
+	MD & $0.35$ & $0.2$ \\
+	$\sigma$ & $0.23$ & $0.21$ \\ 
+	CI & $[0.32, 0.46]$ & $[0.20, 0.33]$ \\
+\bottomrule
+\end{tabular} 
+\end{center} 
+\end{table}
+
+As can be read from the table, the predicted interaction was supported by the experimental data. The interaction in the long condition was significant: 
+$t(78) = 2.50 p < 0.02 d = 0.56$. However, in the short condition the interaction was not significant \footnote{This statistic was not included in the original paper}. This might mean that humans are more sensitive to the case where they are presented an alternative cause that is happening faster, than when the alternative cause is happening slower.  
+
+%\subsubsection{Third Level Headings}
+
+%Third level headings should be 10~point, initial caps, bold, and flush
+%left. Leave one line space above the heading, but no space after the
+%heading.
+
+
+\section{Formalities, Footnotes, and Floats}
+
+Use standard APA citation format. Citations within the text should
+include the author's last name and year. If the authors' names are
+included in the sentence, place only the year in parentheses, as in
+\citeA{NewellSimon1972a}, but otherwise place the entire reference in
+parentheses with the authors and year separated by a comma
+\cite{NewellSimon1972a}. List multiple references alphabetically and
+separate them by semicolons
+\cite{ChalnickBillman1988a,NewellSimon1972a}. Use the
+``et~al.'' construction only after listing all the authors to a
+publication in an earlier reference and for citations with four or
+more authors.
+
+
+\subsection{Footnotes}
+
+Indicate footnotes with a number\footnote{Sample of the first
+footnote.} in the text. Place the footnotes in 9~point font at the
+bottom of the column on which they appear. Precede the footnote block
+with a horizontal rule.\footnote{Sample of the second footnote.}
+
+
+\subsection{Tables}
+
+Number tables consecutively. Place the table number and title (in
+10~point) above the table with one line space above the caption and
+one line space below it, as in Table~\ref{sample-table}. You may float
+tables to the top or bottom of a column, and you may set wide tables across
+both columns.
+
+\begin{table}[H]
+\begin{center} 
+\caption{Sample table title.} 
+\label{sample-table} 
+\vskip 0.12in
+\begin{tabular}{ll} 
+\hline
+Error type    &  Example \\
+\hline
+Take smaller        &   63 - 44 = 21 \\
+Always borrow~~~~   &   96 - 42 = 34 \\
+0 - N = N           &   70 - 47 = 37 \\
+0 - N = 0           &   70 - 47 = 30 \\
+\hline
+\end{tabular} 
+\end{center} 
+\end{table}
+
+
+\subsection{Figures}
+
+All artwork must be very dark for purposes of reproduction and should
+not be hand drawn. Number figures sequentially, placing the figure
+number and caption, in 10~point, after the figure with one line space
+above the caption and one line space below it, as in
+Figure~\ref{sample-figure}. If necessary, leave extra white space at
+the bottom of the page to avoid splitting the figure and figure
+caption. You may float figures to the top or bottom of a column, and
+you may set wide figures across both columns.
+
+\begin{figure}[H]
+\begin{center}
+\fbox{CoGNiTiVe ScIeNcE}
+\end{center}
+\caption{This is a figure.} 
+\label{sample-figure}
+\end{figure}
+
+
+\section{Acknowledgments}
+
+In the \textbf{initial submission}, please \textbf{do not include
+  acknowledgements}, to preserve anonymity.  In the \textbf{final submission},
+place acknowledgments (including funding information) in a section \textbf{at
+the end of the paper}.
+
+
+\section{References Instructions}
+
+Follow the APA Publication Manual for citation format, both within the
+text and in the reference list, with the following exceptions: (a) do
+not cite the page numbers of any book, including chapters in edited
+volumes; (b) use the same format for unpublished references as for
+published ones. Alphabetize references by the surnames of the authors,
+with single author entries preceding multiple author entries. Order
+references by the same authors by the year of publication, with the
+earliest first.
+
+Use a first level section heading, ``{\bf References}'', as shown
+below. Use a hanging indent style, with the first line of the
+reference flush against the left margin and subsequent lines indented
+by 1/8~inch. Below are example references for a conference paper, book
+chapter, journal article, dissertation, book, technical report, and
+edited volume, respectively.
+
+\nocite{ChalnickBillman1988a}
+\nocite{Feigenbaum1963a}
+\nocite{Hill1983a}
+\nocite{OhlssonLangley1985a}
+% \nocite{Lewis1978a}
+\nocite{Matlock2001}
+\nocite{NewellSimon1972a}
+\nocite{ShragerLangley1990a}
+
+
+\bibliographystyle{apacite}
+
+\setlength{\bibleftmargin}{.125in}
+\setlength{\bibindent}{-\bibleftmargin}
+
+\bibliography{CogSci_Template}
+
+\end{document}

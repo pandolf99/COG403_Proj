@@ -61,6 +61,7 @@ def plot_exp3(d, title, errors=None):
     d: dictionary with conditions as keys and value for condition
     title: title to use (experimental or prediction)
     """
+    errs = None
     if errors is not None:
         errs = [(e[1] - e[0])/2 for e in errors]
     conditions = ("Long", "Short")
@@ -77,7 +78,10 @@ def plot_exp3(d, title, errors=None):
     j = 0
     for s, val in causal_strengths.items():
         offset = width * multiplier
-        ax.bar(x + offset, val, width, label=s, yerr=errs[j:i])
+        errSlice = None
+        if errs:
+            errsSlice = errs[j:i]
+        ax.bar(x + offset, val, width, label=s, yerr=errSlice)
         # ax.bar_label(rects, padding=3)
         multiplier += 1
         i += 2
@@ -85,7 +89,7 @@ def plot_exp3(d, title, errors=None):
     text1 = r'Long: $\kappa = 30, \theta = 100 $' + "\n"
     text2 = r'Short: $\kappa = 10, \theta = 100$'+ "\n" 
     props = dict(boxstyle='round', color="wheat")
-    ax.text(1, 0.76, text1+text2, bbox=props)
+    ax.text(1.2, 0.75, text1+text2, bbox=props)
     ax.set_xlabel("Relative causal latencies of target cause")
     ax.set_ylabel('P(c->e|e,c,a)')
     ax.set_ylim(0, 1)
@@ -107,7 +111,16 @@ def plot_correlation2(mod, exp):
     #find line of best fit
     a, b = np.polyfit(x, y, 1)
     #add points to plot
-    plt.scatter(x, y)
+    fig, ax = plt.subplots()
+    ax.scatter(x, y)
     #add line of best fit to plot
-    plt.plot(x, a*x+b)
-    plt.show()
+    ax.plot(x, a*x+b)
+    title = "Correlation between experimental and predicted results (means)"
+    ax.set_title(title)
+    anchor = AnchoredText(r"$r = 0.99$", loc="upper left") 
+    ax.set_xlabel('P(c->e|e,c,a) predicted by model')
+    ax.set_ylabel('P(c->e|e,c,a) experimental')
+    ax.yaxis.set_major_locator(ticker.MultipleLocator(0.1))
+    ax.xaxis.set_major_locator(ticker.MultipleLocator(0.1))
+    ax.add_artist(anchor)
+    plt.savefig(f'results/{title}.png')

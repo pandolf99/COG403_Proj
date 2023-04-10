@@ -53,11 +53,9 @@ def t_test(d1, d2):
     """Perform a t test between d1 and d2
     Also return cohen's d
     """
-    n1 = len(d1)
-    n2 = len(d2)
     s1 = np.var(d1, ddof=1)
     s2 = np.var(d2, ddof=1)
-    s = np.sqrt(((n1 - 1)*s1 + (n2 - 1)*s2) / (n1 + n2 - 2))
+    s = np.sqrt((s1 + s2) /  2)
     d = (np.mean(d1) - np.mean(d2)) / s
     stat, p = ttest_ind(d1, d2)
     return {
@@ -80,7 +78,7 @@ def exp1_stats():
                 "mean": mean,
                 "std": std,
                 "med": med,
-                "95CI": CI
+                "95CI": list(CI)
                 }
     return ret
 
@@ -110,7 +108,7 @@ def exp2_stats():
     ret = {}
     i = 0
     for col in d:
-        cond = d[col]
+        cond = d[col] / 10
         mean = np.mean(cond)
         std = np.std(cond)
         med = np.median(cond)
